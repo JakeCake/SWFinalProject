@@ -49,7 +49,7 @@ public class MatchInfoImpl implements MatchInfo, Runnable {
 
     @Override
     public void run() {
-        result = game.newInstance().playGame(getParticipantA(), getParticipantB());
+        result = game.newInstance().playGame(getParticipantA().getAI().newInstance(), getParticipantB().getAI().newInstance());
         hasFinished = true;
     }
     

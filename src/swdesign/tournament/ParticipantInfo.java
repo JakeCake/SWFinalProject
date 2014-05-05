@@ -7,7 +7,7 @@
 package swdesign.tournament;
 
 import swdesign.game.AIInfo;
-
+import swdesign.game.AI;
 /**
  *
  * @author tog
@@ -15,4 +15,5 @@ import swdesign.game.AIInfo;
 public interface ParticipantInfo extends AIInfo
 {
     public int getScore();
+    public AI getAI();
 }

@@ -29,7 +29,6 @@ public class TournamentUIImpl implements TournamentUI {
     @Override
     public void tournamentStart(String gameName, ParticipantInfo[] participants, MatchInfo[] matches)
     {
-
         ExecutorService executor;
         if (multithreaded)
         {
@@ -53,6 +52,13 @@ public class TournamentUIImpl implements TournamentUI {
             Logger.getLogger(TournamentUIImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+       
+        for (int i = 0; i < matches.length; i++)
+        {
+            System.out.println("Match [" + matches[i].matchID() + "] with AI [" + matches[i].getParticipantA().getName() + "] vs. AI [" + matches[i].getParticipantB().getName() + " [ended in a " + matches[i].getResult() + "]");
+            
+        }
+        
     }
 
     @Override

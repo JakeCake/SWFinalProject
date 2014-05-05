@@ -37,5 +37,10 @@ public class ParticipantInfoImpl implements ParticipantInfo{
     public void retractScore() {
         score--;
     }
+
+    @Override
+    public AI getAI() {
+        return ai;
+    }
     
 }

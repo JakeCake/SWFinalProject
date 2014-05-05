@@ -25,9 +25,10 @@ public class SWDesignFinalProject
         
         Game game = new StupidNumberGame(1000);
         
-        ParticipantInfo[] participants = new ParticipantInfo[2];
+        ParticipantInfo[] participants = new ParticipantInfo[3];
         participants[0] = (new ParticipantInfoImpl(new RandomPlayer("RandomPlayer", "RandomPlayer", 1, 9)));
         participants[1] = (new ParticipantInfoImpl(new ConstantPlayer("ConstantPlayer", "ConstantPlayer", 5)));
+        participants[2] = (new ParticipantInfoImpl(new ConstantPlayer("ConstantPlayer2", "ConstantPlayer2", 6)));
         
         TournamentUIImpl tournament = new TournamentUIImpl(game);
         ParticipantInfo[] p = participants;
