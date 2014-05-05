@@ -51,6 +51,7 @@ public class MatchInfoImpl implements MatchInfo, Runnable {
     public void run() {
         result = game.newInstance().playGame(getParticipantA().getAI().newInstance(), getParticipantB().getAI().newInstance());
         hasFinished = true;
+        
     }
     
 }
