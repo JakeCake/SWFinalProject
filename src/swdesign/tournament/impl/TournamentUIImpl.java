@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import swdesign.examplegames.stupidnumbergame.StupidNumberGame;
 import swdesign.game.Game;
+import swdesign.game.GameInstance;
 import swdesign.gui.SimpleGUI;
 import swdesign.tournament.MatchInfo;
 import swdesign.tournament.ParticipantInfo;
@@ -25,8 +26,7 @@ public class TournamentUIImpl implements TournamentUI {
     {
         this.game = game;
     }
-    
-    
+
     @Override
     public void tournamentStart(String gameName, ParticipantInfo[] participants, MatchInfo[] matches)
     {
@@ -53,13 +53,30 @@ public class TournamentUIImpl implements TournamentUI {
             Logger.getLogger(TournamentUIImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-       
         for (int i = 0; i < matches.length; i++)
         {
             System.out.println("Match [" + matches[i].matchID() + "] with AI [" + matches[i].getParticipantA().getName() + "] vs. AI [" + matches[i].getParticipantB().getName() + " [ended in a " + matches[i].getResult() + "]");
-            
+            setScore(matches, i);
         }
-        
+
+    }
+
+    private void setScore(MatchInfo[] matches, int i)
+    {
+        switch (matches[i].getResult())
+        {
+            case AWINS:
+                matches[i].getParticipantA().addScore();
+                matches[i].getParticipantB().retractScore();
+                break;
+            case BWINS:
+                matches[i].getParticipantA().retractScore();
+                matches[i].getParticipantB().addScore();
+                break;
+            case TIE:
+                //do nothing
+                break;
+        }
     }
 
     @Override
