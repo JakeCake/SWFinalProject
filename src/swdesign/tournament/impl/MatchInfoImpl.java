@@ -14,9 +14,11 @@ public class MatchInfoImpl implements MatchInfo, Runnable {
     private ParticipantInfo participantA;
     private ParticipantInfo participantB;
     
-    public MatchInfoImpl(int id, Game game) {
+    public MatchInfoImpl(int id, Game game, ParticipantInfo A, ParticipantInfo B) {
         this.id = id;
         this.game = game;
+        this.participantA = A;
+        this.participantB = B;
         hasFinished = false;
     }
     
