@@ -14,10 +14,12 @@ import swdesign.tournament.TournamentUI;
 
 public class TournamentUIImpl implements TournamentUI {
 
-    SimpleGUI gui = new SimpleGUI();
+    private final SimpleGUI gui = new SimpleGUI();
+    private ExecutorService executor;
+    private final Game game;
 
-    boolean multithreaded = true;
-    Game game;
+    //Choose whether to use multithreading or not
+    private final boolean multithreaded = true;
 
     public TournamentUIImpl(Game game)
     {
@@ -27,57 +29,12 @@ public class TournamentUIImpl implements TournamentUI {
     @Override
     public void tournamentStart(String gameName, ParticipantInfo[] participants, MatchInfo[] matches)
     {
-        ExecutorService executor;
-        if (multithreaded)
-        {
-            executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-        } else
-        {
-            executor = Executors.newFixedThreadPool(1);
-        }
-        for (int i = 0; i < matches.length; i++)
-        {
-            executor.execute((MatchInfoImpl) matches[i]);
-            matchStarted(matches[i].matchID());
-        }
-        System.out.println("");
+        instantiateExecuter();
 
-        executor.shutdown();
-        try
-        {
-            executor.awaitTermination(1, TimeUnit.HOURS);
-        } catch (InterruptedException ex)
-        {
-            Logger.getLogger(TournamentUIImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        for (int i = 0; i < matches.length; i++)
-        {
-            System.out.println("Match [" + matches[i].matchID() + "] with AI [" + matches[i].getParticipantA().getName() + "] vs. AI [" + matches[i].getParticipantB().getName() + " [ended in a " + matches[i].getResult() + "]");
-            setScore(matches, i);
-        }
-        System.out.println("");
+        runTournament(matches);
 
         tournamentFinished(sortParticipantsByScore(participants));
 
-    }
-
-    private void setScore(MatchInfo[] matches, int i)
-    {
-        switch (matches[i].getResult())
-        {
-            case AWINS:
-                matches[i].getParticipantA().addScore();
-                matches[i].getParticipantB().retractScore();
-                break;
-            case BWINS:
-                matches[i].getParticipantA().retractScore();
-                matches[i].getParticipantB().addScore();
-                break;
-            case TIE:
-                //do nothing
-                break;
-        }
     }
 
     @Override
@@ -95,10 +52,55 @@ public class TournamentUIImpl implements TournamentUI {
     @Override
     public void tournamentFinished(ParticipantInfo[] sortedParticipants)
     {
+        int place = 0;
+        int scoreTemp = 0;
         for (ParticipantInfo p : sortedParticipants)
         {
-            System.out.println(p.getName() + " score: " + p.getScore());
+            if(!(scoreTemp == p.getScore())){
+                place++;
+            }
+            scoreTemp = p.getScore();
+            System.out.println(place +" place: "+p.getName() + " score: " + p.getScore());
         }
+    }
+
+    //Everything below is refactored methods to make the above methods simpler
+    private void instantiateExecuter()
+    {
+        if (multithreaded)
+        {
+            executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+        } else
+        {
+            executor = Executors.newFixedThreadPool(1);
+        }
+    }
+
+    private void runTournament(MatchInfo[] matches)
+    {
+        for (MatchInfo match : matches)
+        {
+            executor.execute((MatchInfoImpl) match);
+            matchStarted(match.matchID());
+        }
+
+        System.out.println();
+
+        executor.shutdown();
+        try
+        {
+            executor.awaitTermination(1, TimeUnit.HOURS);
+        } catch (InterruptedException ex)
+        {
+            System.out.println("InterruptedExeption in TournamentUIImplementation");
+        }
+
+        for (int i = 0; i < matches.length; i++)
+        {
+            System.out.println("Match [" + matches[i].matchID() + "] with AI [" + matches[i].getParticipantA().getName() + "] vs. AI [" + matches[i].getParticipantB().getName() + " [ended in a " + matches[i].getResult() + "]");
+            setScore(matches, i);
+        }
+        System.out.println();
     }
 
     public MatchInfo[] computeMatches(ParticipantInfo[] participants)
@@ -133,11 +135,28 @@ public class TournamentUIImpl implements TournamentUI {
         return a;
     }
 
+    private void setScore(MatchInfo[] matches, int i)
+    {
+        switch (matches[i].getResult())
+        {
+            case AWINS:
+                matches[i].getParticipantA().addScore();
+                matches[i].getParticipantB().retractScore();
+                break;
+            case BWINS:
+                matches[i].getParticipantA().retractScore();
+                matches[i].getParticipantB().addScore();
+                break;
+            case TIE:
+                //do nothing
+                break;
+        }
+    }
+
     private ParticipantInfo[] sortParticipantsByScore(ParticipantInfo[] participants)
     {
         Arrays.sort(participants);
         return participants;
-
     }
 
 }

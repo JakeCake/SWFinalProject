@@ -8,7 +8,7 @@ import swdesign.tournament.ParticipantInfo;
 import swdesign.tournament.TournamentUI;
 
 public class MatchInfoImpl implements MatchInfo, Runnable {
-    private int id;
+    private final int id;
     Game game;
     private GameInstance.Result result;
     private boolean hasFinished;

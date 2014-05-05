@@ -1,29 +1,23 @@
 
 package swdesign;
 
-import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import swdesign.examplegames.stupidnumbergame.StupidNumberGame;
 import swdesign.examplegames.stupidnumbergame.players.ConstantPlayer;
 import swdesign.examplegames.stupidnumbergame.players.RandomPlayer;
 import swdesign.game.*;
 import swdesign.tournament.ParticipantInfo;
-import swdesign.tournament.TournamentUI;
 import swdesign.tournament.impl.ParticipantInfoImpl;
 import swdesign.tournament.impl.TournamentUIImpl;
 
 
 public class SWDesignFinalProject
-{
-    private static ExecutorService executor = Executors.newFixedThreadPool(50);
-    
+{    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
-        Game game = new StupidNumberGame(10000);
+        Game game = new StupidNumberGame(100);
         
         System.out.println("Number of Cores: " + Runtime.getRuntime().availableProcessors() + '\n');
         
@@ -40,9 +34,6 @@ public class SWDesignFinalProject
         TournamentUIImpl tournament = new TournamentUIImpl(game);
         ParticipantInfo[] p = participants;
         tournament.tournamentStart("a name?", p, tournament.computeMatches(p));
-        
-        //int numberOfMatches = (int)((participants.length +1 ) / 2.0 * participants.length); 
-        //matches = new MatchInfo[numberOfMatches];
         
     }
     

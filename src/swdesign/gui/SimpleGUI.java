@@ -5,7 +5,6 @@ package swdesign.gui;
 /**
  *
  * @author tog
- * @param <AIInstance>
  */
 public class SimpleGUI
 {
@@ -14,5 +13,8 @@ public class SimpleGUI
     }
     public void matchEnded(int matchIndex) {
         System.out.println("Match Ended: " + matchIndex);
+    }
+    public void tournamentStarted(int matchIndex) {
+        System.out.println("Tournament Started: " + matchIndex);
     }
 }

@@ -47,7 +47,7 @@ public class ParticipantInfoImpl implements ParticipantInfo, Comparable<Particip
 
     @Override
     public int compareTo(ParticipantInfo o) {
-        return this.getScore() - o.getScore();
+        return  o.getScore() - this.getScore();
     }
     
 }

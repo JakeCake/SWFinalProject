@@ -3,26 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package swdesign.examplegames.stupidnumbergame;
 
 import swdesign.game.Game;
 import swdesign.game.GameInstance;
 
-
 /**
  *
  * @author tog
  */
-public class StupidNumberGame implements Game<StupidNumberPlayer>, GameInstance<StupidNumberPlayer>
-{
+public class StupidNumberGame implements Game<StupidNumberPlayer>, GameInstance<StupidNumberPlayer> {
+
     private final int numberOfGames;
-    
+
     public StupidNumberGame(int numberOfGames)
     {
         this.numberOfGames = numberOfGames;
     }
-    
+
     @Override
     public String getName()
     {
@@ -40,30 +38,52 @@ public class StupidNumberGame implements Game<StupidNumberPlayer>, GameInstance<
     {
         int aScore = 0;
         int bScore = 0;
-        for(int i = 0; i < numberOfGames; ++i)
+        for (int i = 0; i < numberOfGames; ++i)
         {
             int aNumber = a.getNumber();
             int bNumber = b.getNumber();
-       
-            if(aNumber > bNumber) ++aScore;
-            else if(bNumber > aNumber) ++bScore;
+
+            if (aNumber > bNumber)
+            {
+                ++aScore;
+            } else if (bNumber > aNumber)
+            {
+                ++bScore;
+            }
+            for (int j = 0; j < 1000; j++)
+            {
+                Math.sin(3456);
+                Math.atan2(27.9, 48.23);
+                Math.log(782374.3);
+                Math.sin(3456);
+                Math.atan2(27.9, 48.23);
+                Math.log(782374.3);
+                Math.sin(3456);
+                Math.atan2(27.9, 48.23);
+                Math.log(782374.3);
+                Math.sin(3456);
+                Math.atan2(27.9, 48.23);
+                Math.log(782374.3);
+                Math.sin(3456);
+                Math.atan2(27.9, 48.23);
+                Math.log(782374.3);
+                Math.sin(3456);
+                Math.atan2(27.9, 48.23);
+                Math.log(782374.3);
+            }
         }
-        
-         for (int i = 0; i < 1000000; i++)
+
+        //Stupid slowdown
+        if (aScore > bScore)
         {
-            Math.sin(3456);
-            Math.atan2(27.9, 48.23);
-            Math.log(782374.3);
-            Math.sin(3456);
-            Math.atan2(27.9, 48.23);
-            Math.log(782374.3);
+            return Result.AWINS;
         }
-         
-        if(aScore > bScore) return Result.AWINS;
-        if(bScore > aScore) return Result.BWINS;
+        if (bScore > aScore)
+        {
+            return Result.BWINS;
+        }
         return Result.TIE;
-        
-       
+
     }
-    
+
 }
