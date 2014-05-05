@@ -110,5 +110,9 @@ public class TournamentUIImpl implements TournamentUI {
         }
         return a;
     }
+    
+    private ParticipantInfo[] sortParticipantsByScore(ParticipantInfo[] participants) {
+        
+    }
 
 }
