@@ -7,7 +7,7 @@ import swdesign.tournament.MatchInfo;
 import swdesign.tournament.ParticipantInfo;
 
 public class MatchInfoImpl implements MatchInfo, Runnable {
-    
+    private int id;
     Game game;
     private GameInstance.Result result;
     private boolean hasFinished;
@@ -15,6 +15,7 @@ public class MatchInfoImpl implements MatchInfo, Runnable {
     private ParticipantInfo participantB;
     
     public MatchInfoImpl(int id, Game game) {
+        this.id = id;
         this.game = game;
         hasFinished = false;
     }

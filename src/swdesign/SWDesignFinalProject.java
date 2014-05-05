@@ -8,7 +8,6 @@ import swdesign.examplegames.stupidnumbergame.StupidNumberGame;
 import swdesign.examplegames.stupidnumbergame.players.ConstantPlayer;
 import swdesign.examplegames.stupidnumbergame.players.RandomPlayer;
 import swdesign.game.*;
-import swdesign.tournament.MatchInfo;
 import swdesign.tournament.ParticipantInfo;
 import swdesign.tournament.impl.ParticipantInfoImpl;
 
