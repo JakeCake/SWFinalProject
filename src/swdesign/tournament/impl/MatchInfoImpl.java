@@ -5,21 +5,25 @@ import swdesign.game.Game;
 import swdesign.game.GameInstance;
 import swdesign.tournament.MatchInfo;
 import swdesign.tournament.ParticipantInfo;
+import swdesign.tournament.TournamentUI;
 
 public class MatchInfoImpl implements MatchInfo, Runnable {
     private int id;
     Game game;
     private GameInstance.Result result;
     private boolean hasFinished;
-    private ParticipantInfo participantA;
-    private ParticipantInfo participantB;
+    private final ParticipantInfo participantA;
+    private final ParticipantInfo participantB;
+    private final TournamentUI tui;
     
-    public MatchInfoImpl(int id, Game game, ParticipantInfo A, ParticipantInfo B) {
+    public MatchInfoImpl(int id, Game game, ParticipantInfo A, ParticipantInfo B, TournamentUI tui) {
         this.id = id;
         this.game = game;
         this.participantA = A;
         this.participantB = B;
         hasFinished = false;
+        this.tui = tui;
+        
     }
     
     @Override
@@ -51,6 +55,7 @@ public class MatchInfoImpl implements MatchInfo, Runnable {
     public void run() {
         result = game.newInstance().playGame(getParticipantA().getAI().newInstance(), getParticipantB().getAI().newInstance());
         hasFinished = true;
+        tui.matchFinished(id);
         
     }
     

@@ -16,7 +16,7 @@ public class TournamentUIImpl implements TournamentUI {
 
     SimpleGUI gui = new SimpleGUI();
 
-    boolean multithreaded = false;
+    boolean multithreaded = true;
     Game game;
 
     public TournamentUIImpl(Game game)
@@ -55,7 +55,6 @@ public class TournamentUIImpl implements TournamentUI {
         {
             System.out.println("Match [" + matches[i].matchID() + "] with AI [" + matches[i].getParticipantA().getName() + "] vs. AI [" + matches[i].getParticipantB().getName() + " [ended in a " + matches[i].getResult() + "]");
             setScore(matches, i);
-            matchFinished(i);
         }
         System.out.println("");
 
@@ -117,7 +116,7 @@ public class TournamentUIImpl implements TournamentUI {
             for (int j = i + 1; j < pNum; j++)
             {
                 p2 = participants[j];
-                m[matchId] = new MatchInfoImpl(matchId, game, p1, p2);
+                m[matchId] = new MatchInfoImpl(matchId, game, p1, p2, this);
                 matchId++;
             }
         }
