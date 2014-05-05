@@ -49,9 +49,21 @@ public class StupidNumberGame implements Game<StupidNumberPlayer>, GameInstance<
             else if(bNumber > aNumber) ++bScore;
         }
         
+         for (int i = 0; i < 1000000; i++)
+        {
+            Math.sin(3456);
+            Math.atan2(27.9, 48.23);
+            Math.log(782374.3);
+            Math.sin(3456);
+            Math.atan2(27.9, 48.23);
+            Math.log(782374.3);
+        }
+         
         if(aScore > bScore) return Result.AWINS;
         if(bScore > aScore) return Result.BWINS;
         return Result.TIE;
+        
+       
     }
     
 }

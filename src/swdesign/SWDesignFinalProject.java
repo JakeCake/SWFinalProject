@@ -23,7 +23,7 @@ public class SWDesignFinalProject
      */
     public static void main(String[] args) {
         
-        Game game = new StupidNumberGame(1000);
+        Game game = new StupidNumberGame(10000);
         
         System.out.println("Number of Cores: " + Runtime.getRuntime().availableProcessors() + '\n');
         

@@ -34,11 +34,7 @@ public class RandomPlayer extends AIInfoImpl implements AI<StupidNumberPlayer>, 
     @Override
     public int getNumber()
     {
-        try {
-            Thread.sleep(1);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ConstantPlayer.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
         int range = max - min + 1;
         return min + rnd.nextInt(range);
     } 

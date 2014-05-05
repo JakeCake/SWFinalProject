@@ -30,10 +30,12 @@ public class ParticipantInfoImpl implements ParticipantInfo, Comparable<Particip
         return ai.getName();
     }
     
+    @Override
     public void addScore() {
         score++;
     }
     
+    @Override
     public void retractScore() {
         score--;
     }

@@ -1,15 +1,12 @@
 package swdesign.tournament.impl;
 
 import java.util.Arrays;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import swdesign.examplegames.stupidnumbergame.StupidNumberGame;
 import swdesign.game.Game;
-import swdesign.game.GameInstance;
 import swdesign.gui.SimpleGUI;
 import swdesign.tournament.MatchInfo;
 import swdesign.tournament.ParticipantInfo;
@@ -44,7 +41,7 @@ public class TournamentUIImpl implements TournamentUI {
             matchStarted(matches[i].matchID());
         }
         System.out.println("");
-        
+
         executor.shutdown();
         try
         {
@@ -58,9 +55,10 @@ public class TournamentUIImpl implements TournamentUI {
         {
             System.out.println("Match [" + matches[i].matchID() + "] with AI [" + matches[i].getParticipantA().getName() + "] vs. AI [" + matches[i].getParticipantB().getName() + " [ended in a " + matches[i].getResult() + "]");
             setScore(matches, i);
+            matchFinished(i);
         }
         System.out.println("");
-        
+
         tournamentFinished(sortParticipantsByScore(participants));
 
     }
@@ -92,14 +90,16 @@ public class TournamentUIImpl implements TournamentUI {
     @Override
     public void matchFinished(int matchIndex)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        gui.matchEnded(matchIndex);
     }
 
     @Override
     public void tournamentFinished(ParticipantInfo[] sortedParticipants)
     {
-        for(ParticipantInfo p : sortedParticipants) 
+        for (ParticipantInfo p : sortedParticipants)
+        {
             System.out.println(p.getName() + " score: " + p.getScore());
+        }
     }
 
     public MatchInfo[] computeMatches(ParticipantInfo[] participants)
@@ -133,11 +133,12 @@ public class TournamentUIImpl implements TournamentUI {
         }
         return a;
     }
-    
-    private ParticipantInfo[] sortParticipantsByScore(ParticipantInfo[] participants) {
+
+    private ParticipantInfo[] sortParticipantsByScore(ParticipantInfo[] participants)
+    {
         Arrays.sort(participants);
         return participants;
-        
+
     }
-    
-    }
+
+}
