@@ -1,5 +1,6 @@
 package swdesign.tournament.impl;
 
+import java.util.Arrays;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -112,7 +113,9 @@ public class TournamentUIImpl implements TournamentUI {
     }
     
     private ParticipantInfo[] sortParticipantsByScore(ParticipantInfo[] participants) {
+        Arrays.sort(participants);
+        return participants;
         
     }
-
-}
+    
+    }

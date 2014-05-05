@@ -4,7 +4,7 @@ package swdesign.tournament.impl;
 import swdesign.game.AI;
 import swdesign.tournament.ParticipantInfo;
 
-public class ParticipantInfoImpl implements ParticipantInfo{
+public class ParticipantInfoImpl implements ParticipantInfo, Comparable<ParticipantInfo>{
 
     private int score;
     
@@ -41,6 +41,11 @@ public class ParticipantInfoImpl implements ParticipantInfo{
     @Override
     public AI getAI() {
         return ai;
+    }
+
+    @Override
+    public int compareTo(ParticipantInfo o) {
+        return this.getScore() - o.getScore();
     }
     
 }
