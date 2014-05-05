@@ -43,7 +43,8 @@ public class TournamentUIImpl implements TournamentUI {
             executor.execute((MatchInfoImpl) matches[i]);
             matchStarted(matches[i].matchID());
         }
-
+        System.out.println("");
+        
         executor.shutdown();
         try
         {
@@ -58,6 +59,9 @@ public class TournamentUIImpl implements TournamentUI {
             System.out.println("Match [" + matches[i].matchID() + "] with AI [" + matches[i].getParticipantA().getName() + "] vs. AI [" + matches[i].getParticipantB().getName() + " [ended in a " + matches[i].getResult() + "]");
             setScore(matches, i);
         }
+        System.out.println("");
+        
+        tournamentFinished(sortParticipantsByScore(participants));
 
     }
 
@@ -94,7 +98,8 @@ public class TournamentUIImpl implements TournamentUI {
     @Override
     public void tournamentFinished(ParticipantInfo[] sortedParticipants)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(ParticipantInfo p : sortedParticipants) 
+            System.out.println(p.getName() + " score: " + p.getScore());
     }
 
     public MatchInfo[] computeMatches(ParticipantInfo[] participants)
