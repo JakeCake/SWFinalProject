@@ -6,6 +6,8 @@
 
 package swdesign.examplegames.stupidnumbergame.players;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import swdesign.examplegames.AIInfoImpl;
 import swdesign.examplegames.stupidnumbergame.StupidNumberPlayer;
 import swdesign.game.AI;
@@ -27,6 +29,11 @@ public class ConstantPlayer extends AIInfoImpl implements AI<StupidNumberPlayer>
     @Override
     public int getNumber()
     {
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ConstantPlayer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return number;
     }
     

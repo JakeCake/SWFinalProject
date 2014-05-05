@@ -19,7 +19,7 @@ public class TournamentUIImpl implements TournamentUI {
 
     SimpleGUI gui = new SimpleGUI();
 
-    boolean multithreaded = true;
+    boolean multithreaded = false;
     Game game;
 
     public TournamentUIImpl(Game game)
