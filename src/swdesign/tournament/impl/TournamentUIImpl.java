@@ -97,7 +97,7 @@ public class TournamentUIImpl implements TournamentUI {
 
         for (int i = 0; i < matches.length; i++)
         {
-            System.out.println("Match [" + matches[i].matchID() + "] with AI [" + matches[i].getParticipantA().getName() + "] vs. AI [" + matches[i].getParticipantB().getName() + " [ended in a " + matches[i].getResult() + "]");
+            System.out.println("Match [" + matches[i].matchID() + "] with AI [" + matches[i].getParticipantA().getName() + "] vs. AI [" + matches[i].getParticipantB().getName() + " ended in a [" + matches[i].getResult() + "]");
             setScore(matches, i);
         }
         System.out.println();

@@ -19,7 +19,7 @@ import swdesign.game.AI;
  */
 public class RandomPlayer extends AIInfoImpl implements AI<StupidNumberPlayer>, StupidNumberPlayer
 {
-    private static final Random rnd = new Random();
+    private final Random rnd = new Random();
 
     private final int min;
     private final int max;
